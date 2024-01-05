@@ -690,6 +690,8 @@ export class HSTable<
 			});
 
 			this._records.push(record);
+
+			console.log('new record', record);
 		}
 
 		record.setFields(this.getFields());
