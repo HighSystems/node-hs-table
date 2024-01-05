@@ -417,6 +417,7 @@ export class HSTable<
 		this._records = results.map((record) => {
 			const hsRecord = new HSRecord<RecordData>({
 				highsystems: this._hs,
+				applicationId: this.getAppId(),
 				tableId: this.getTableId(),
 				fids: this.getFids()
 			});
