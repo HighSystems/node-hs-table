@@ -681,6 +681,8 @@ export class HSTable<
 			}
 		}
 
+		console.log('new record.0', this, this.getAppId());
+
 		if(!record){
 			record = new HSRecord<RecordData>({
 				highsystems: this._hs,
@@ -691,8 +693,10 @@ export class HSTable<
 
 			this._records.push(record);
 
-			console.log('new record', record);
+			console.log('new record.1', record);
 		}
+
+		console.log('new record.2', record);
 
 		record.setFields(this.getFields());
 
