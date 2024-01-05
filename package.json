@@ -1,6 +1,6 @@
 {
   "name": "@highsystems/table",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "A lightweight abstraction layer for High Systems",
   "keywords": [
     "High Systems",
@@ -23,8 +23,8 @@
   },
   "maintainers": [],
   "contributors": [],
-  "main": "./dist/hs-table.js",
-  "types": "./dist/hs-table.d.ts",
+  "main": "./dist/table.js",
+  "types": "./dist/table.d.ts",
   "repository": {
     "type": "git",
     "url": "git@github.com:highsystems/node-hs-table.git"
@@ -38,9 +38,9 @@
   },
   "dependencies": {
     "deepmerge": "^4.3.1",
-    "@highsystems/client": "0.1.0",
-    "@highsystems/field": "0.1.1",
-    "@highsystems/record": "0.1.1",
+    "@highsystems/client": "0.1.1",
+    "@highsystems/field": "0.1.2",
+    "@highsystems/record": "0.1.2",
     "rfc4122": "^1.0.6"
   },
   "devDependencies": {
