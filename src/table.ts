@@ -507,16 +507,12 @@ export class HSTable<
 						const fid = fids[name];
 
 						if(fid){
-							record[fid] = {
-								value: replaceUndefinedWithString(hsRecord.get(name))
-							};
+							record[fid] = replaceUndefinedWithString(hsRecord.get(name));
 						}
 
 						return record;
 
-					}, {} as Record<string,{
-						value: any
-					}>);
+					}, {} as Record<string, any>);
 				}),
 				requestOptions
 			});
