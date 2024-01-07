@@ -130,12 +130,14 @@ export class HSTable<
 		}
 
 		if(record.get('recordid')){
-			results = await record.delete({
-				requestOptions
-			});
-
-			if(!results){
+			try {
+				await record.delete({
+					requestOptions
+				});
+			}catch(err){
 				this._records.push(record);
+
+				throw err;
 			}
 		}
 
@@ -251,9 +253,9 @@ export class HSTable<
 		return this._fids as HSFids<RecordData>;
 	}
 
-	getField(id: string, returnIndex: true): string | undefined;
+	getField(id: string, returnIndex: true): number | undefined;
 	getField(id: string, returnIndex?: false): HSField | undefined;
-	getField(id: string, returnIndex: boolean = false): string | HSField | undefined {
+	getField(id: string, returnIndex: boolean = false): number | HSField | undefined {
 		const fields = this.getFields();
 
 		let result = undefined;
@@ -264,7 +266,6 @@ export class HSTable<
 			}
 		}
 
-		// @ts-expect-error
 		return result;
 	}
 
@@ -319,6 +320,7 @@ export class HSTable<
 			if(!HSField.IsHSField(field)){
 				field = new HSField({
 					highsystems: this._hs,
+					applicationId: this.getAppId(),
 					tableId: this.getTableId(),
 					fid: field
 				});
@@ -677,8 +679,6 @@ export class HSTable<
 			}
 		}
 
-		console.log('new record.0', this, this.getAppId());
-
 		if(!record){
 			record = new HSRecord<RecordData>({
 				highsystems: this._hs,
@@ -688,11 +688,7 @@ export class HSTable<
 			});
 
 			this._records.push(record);
-
-			console.log('new record.1', record);
 		}
-
-		console.log('new record.2', record);
 
 		record.setFields(this.getFields());
 
