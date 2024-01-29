@@ -99,7 +99,7 @@ export class HSTable<
 
 	async delete({ requestOptions }: HighSystemsRequest = {}) {
 		const results = await this._hs.deleteTable({
-			appid: this.getAppId(),
+			appid: this.getApplicationId(),
 			tableid: this.getTableId(),
 			requestOptions
 		});
@@ -210,13 +210,13 @@ export class HSTable<
 			return this.getTableId();
 		}else
 		if(attribute === 'appId' || attribute === 'applicationId'){
-			return this.getAppId();
+			return this.getApplicationId();
 		}
 
 		return this._data[attribute];
 	}
 
-	getAppId(): string {
+	getApplicationId(): string {
 		return this._applicationId;
 	}
 
@@ -320,7 +320,7 @@ export class HSTable<
 			if(!HSField.IsHSField(field)){
 				field = new HSField({
 					highsystems: this._hs,
-					applicationId: this.getAppId(),
+					applicationId: this.getApplicationId(),
 					tableId: this.getTableId(),
 					fid: field
 				});
@@ -338,7 +338,7 @@ export class HSTable<
 
 	async loadFields({ requestOptions }: HighSystemsRequest = {}): Promise<HSField[]> {
 		const results = await this._hs.getFields({
-			appid: this.getAppId(),
+			appid: this.getApplicationId(),
 			tableid: this.getTableId(),
 			requestOptions
 		});
@@ -350,7 +350,7 @@ export class HSTable<
 			if(!result){
 				result = new HSField({
 					highsystems: this._hs,
-					applicationId: this.getAppId(),
+					applicationId: this.getApplicationId(),
 					tableId: this.getTableId(),
 					fid: field.id
 				});
@@ -380,7 +380,7 @@ export class HSTable<
 
 	async loadTable({ requestOptions }: HighSystemsRequest = {}) {
 		const results = await this._hs.getTable({
-			appid: this.getAppId(),
+			appid: this.getApplicationId(),
 			tableid: this.getTableId(),
 			requestOptions
 		});
@@ -403,7 +403,7 @@ export class HSTable<
 
 		const results = await this._hs.getRecords({
 			...rest,
-			appid: this.getAppId(),
+			appid: this.getApplicationId(),
 			tableid: this.getTableId(),
 			query,
 			columns: fids.map((name) => {
@@ -419,7 +419,7 @@ export class HSTable<
 		this._records = results.map((record) => {
 			const hsRecord = new HSRecord<RecordData>({
 				highsystems: this._hs,
-				applicationId: this.getAppId(),
+				applicationId: this.getApplicationId(),
 				tableId: this.getTableId(),
 				fids: this.getFids()
 			});
@@ -502,7 +502,7 @@ export class HSTable<
 			});
 
 			const results = await this._hs.upsertRecords({
-				appid: this.getAppId(),
+				appid: this.getApplicationId(),
 				tableid: this.getTableId(),
 				data: inputRecords.map((hsRecord) => {
 					return selectedNames.reduce((record, name) => {
@@ -540,7 +540,7 @@ export class HSTable<
 
 			return results;
 		}, {
-			relatedApplication: this.getAppId(),
+			relatedApplication: this.getApplicationId(),
 			requestOptions
 		});
 
@@ -628,7 +628,7 @@ export class HSTable<
 		if(!field){
 			field = new HSField({
 				highsystems: this._hs,
-				applicationId: this.getAppId(),
+				applicationId: this.getApplicationId(),
 				tableId: this.getTableId(),
 				fid: ''
 			});
@@ -682,7 +682,7 @@ export class HSTable<
 		if(!record){
 			record = new HSRecord<RecordData>({
 				highsystems: this._hs,
-				applicationId: this.getAppId(),
+				applicationId: this.getApplicationId(),
 				tableId: this.getTableId(),
 				fids: this.getFids()
 			});
